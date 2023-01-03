@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job2
+spec:
+  template:
+    spec:
+      serviceAccountName: sa-read
+      volumes:
+        - name: result
+          emptyDir: {}
+      initContainers:
+        - name: wait
+          image: bitnami/kubectl
+          command: ["sh", "-c"]
+          args:
+            - kubectl wait --for=condition=complete --timeout 24h job/job1
+        - name: store
+          image: bitnami/kubectl
+          command: ["sh", "-c"]
+          args:
+            - kubectl logs job/job1 > /data/result/job1
+          volumeMounts:
+            - name: result
+              mountPath: /data/result
+      containers:
+        - name: job
+          image: busybox
+          command: ["sh", "-c"]
+          args:
+            - echo "$(cat /data/result/job1)!"
+          volumeMounts:
+            - name: result
+              mountPath: /data/result
+      restartPolicy: Never
+  backoffLimit: 4

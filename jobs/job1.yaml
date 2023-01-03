@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job1
+spec:
+  template:
+    spec:
+      containers:
+        - name: job
+          image: busybox
+          command: ["sh", "-c"]
+          args:
+            - sleep 10 && echo Job Completed!
+      restartPolicy: Never
+  backoffLimit: 4
