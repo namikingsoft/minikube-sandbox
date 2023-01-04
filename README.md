@@ -1,27 +1,37 @@
 # Minikube Sandbox
 
-## Commands
-
-### Start minikube
+## Start minikube
 
 ```bash
 minikube start
 ```
 
-### Delete minikube
+```bash
+minikube start --cpus 2 --memory 2G --nodes 2
+```
+
+## Delete minikube
 
 ```bash
 minikube delete
 ```
 
-### Apply jobs
+## Jobs
+
+### Apply
 
 ```bash
 kubectl apply -f jobs
 ```
 
-### Delete jobs
+### Delete
 
 ```bash
 kubectl delete -f jobs
+```
+
+### Shell on kubepod
+
+```bash
+kubectl exec kubepod kubectl -it -- sh
 ```
