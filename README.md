@@ -35,3 +35,23 @@ kubectl delete -f jobs
 ```bash
 kubectl exec kubepod kubectl -it -- sh
 ```
+
+## Web
+
+### Apply
+
+```bash
+kubectl apply -f web
+```
+
+### Delete
+
+```bash
+kubectl delete -f web
+```
+
+### Tunnel
+
+```bash
+minikube service nginx1
+```
