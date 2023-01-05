@@ -55,3 +55,37 @@ kubectl delete -f web
 ```bash
 minikube service nginx1
 ```
+
+## Namespaces
+
+### Apply
+
+```bash
+kubectl apply -f namespaces
+```
+
+### Delete
+
+```bash
+kubectl delete -f namespaces
+```
+
+### Switch namespace
+
+```bash
+kubectl config set-context $(kubectl config current-context) --namespace=production
+```
+
+```bash
+kubectl config set-context $(kubectl config current-context) --namespace=staging
+```
+
+```bash
+kubectl config set-context $(kubectl config current-context) --namespace=default
+```
+
+### Show current namespace
+
+```bash
+kubectl config get-contexts
+```
